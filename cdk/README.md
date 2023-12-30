@@ -5,16 +5,17 @@
 
 # Introduction
 
-Cloud Development Kit (CDK) is a relatively easy way to deploy infrastructure as code.  Within the context of this project, this is a CDK implementation of almost all of the required items to bring up and operate this project with some customizations.  This guide is built for beginners and is tailored toward a Windows experience.  Advanced or Linux users can gloss over the stuff that doesn't apply to them.
+Cloud Development Kit (CDK) is a relatively easy way to deploy infrastructure as code. Within the context of this project, this is a CDK implementation of almost all of the required items to bring up and operate this project with some customizations. This guide is built for beginners and is tailored toward a Windows experience. Advanced or Linux users can gloss over the stuff that doesn't apply to them.
 
 # Quickest Start (Windows)
+
 Linux friends should be able to adapt this to their needs.
 
 ## Prerequisites
 
 1. [Open an AWS Account]
-2. [Create an Admin IAM User] (Download and save the Access Key and Secret Key).  Alternatively you can generate Access Keys for your root user, but this is bad practice.
-3. [Install AWS CLI] and [configure it] with the keys from step 2.  Specifying the default region and output format are optional.
+2. [Create an Admin IAM User] (Download and save the Access Key and Secret Key). Alternatively you can generate Access Keys for your root user, but this is bad practice.
+3. [Install AWS CLI] and [configure it] with the keys from step 2. Specifying the default region and output format are optional.
 4. [Pick](https://domains.google) [a](https://namecheap.com) [registrar](https://networksolutions.com) [and](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html) [register](https://domain.com) [a](https://register.com) [domain](https://godaddy.com) [name](https://enom.com).
 5. [Create a public hosted zone] for your domain name in Route 53.
 6. [Change the DNS servers] for your new domain to the ones listed in the Route 53 console from step 5.
@@ -39,11 +40,12 @@ cd cdk
 copy .env.sample .env
 notepad .env
 ```
+
 (replace `notepad` with your favorite text editor)
 
 ### 3. Set the required configuration values
 
-The only **required** configuration value is `DOMAIN_NAME`.  This value should be the exact domain name you purchased and set up in Route53.  During setup, a dedicated subdomain zone will be added and an NS record will be added to this root zone.
+The only **required** configuration value is `DOMAIN_NAME`. This value should be the exact domain name you purchased and set up in Route53. During setup, a dedicated subdomain zone will be added and an NS record will be added to this root zone.
 
 Setting an email address for an SNS topic is recommended.
 
@@ -51,7 +53,7 @@ See the section on [Configuration](#configuration) for more configuration option
 
 ### 4. Build and Deploy
 
-All of the subsequent steps assume you are running from a terminal/command prompt window inside of the cdk directory.  Windows users might use the `Node.js command prompt` item in the start menu.
+All of the subsequent steps assume you are running from a terminal/command prompt window inside of the cdk directory. Windows users might use the `Node.js command prompt` item in the start menu.
 
 Build and deploy the solution by running:
 
@@ -59,16 +61,16 @@ Build and deploy the solution by running:
 npm run build && npm run deploy
 ```
 
-You may be asked to install a package like aws-cdk, this is fine to say yes to.  The full deployment will take a few minutes.
+You may be asked to install a package like aws-cdk, this is fine to say yes to. The full deployment will take a few minutes.
 
 ### 5. Customize your server
 
-After you've launched your minecraft server the first time and you've waited for it to finishing generating the world with all defaults, you'll need to get in, make yourself an op, tweak settings, etc.  There are several ways to do this, many of which are outlined at [Usage and Customization] on the main page.
+After you've launched your minecraft server the first time and you've waited for it to finishing generating the world with all defaults, you'll need to get in, make yourself an op, tweak settings, etc. There are several ways to do this, many of which are outlined at [Usage and Customization] on the main page.
 
 ## Additional Configuration
 
-Configuration values can all be passed in as environment variables or by using a 
-`.env` file created from [`.env.sample`](./.env.sample). 
+Configuration values can all be passed in as environment variables or by using a
+`.env` file created from [`.env.sample`](./.env.sample).
 
 **Note:** Environment variables will take precedence over configuration values
 set in `.env`.
@@ -85,12 +87,13 @@ set in `.env`.
 | TASK_MEMORY                   | The amount (in MiB) of memory used by the task running the Minecraft server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `2048`               |
 | TASK_CPU                      | The number of cpu units used by the task running the Minecraft server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `1024`               |
 | VPC_ID                        | VPC ID to deploy your server in. When this value is not specified, a new VPC is automatically created by default.                                                                                                                                                                                                                                                                                                                                                                                                                                          | --                   |
-| MINECRAFT_IMAGE_ENV_VARS_JSON | Additional environment variables to be passed to the [Minecraft Java Docker] or [Minecraft Bedrock Docker]. Value is specified as inline JSON.                                                                                                                                                                                                                                                     | `{ "EULA": "TRUE" }` |
+| MINECRAFT_IMAGE_ENV_VARS_JSON | Additional environment variables to be passed to the [Minecraft Java Docker] or [Minecraft Bedrock Docker]. Value is specified as inline JSON.                                                                                                                                                                                                                                                                                                                                                                                                             | `{ "EULA": "TRUE" }` |
 | SNS_EMAIL_ADDRESS             | The email address you would like to receive server notifications at. <br /><br />If this value is specified, an SNS topic is created and you will receive email notifications each time the minecraft server is launched and ready.                                                                                                                                                                                                                                                                                                                        | --                   |
 | TWILIO_PHONE_FROM             | Your twilio phone number. (i.e `+1XXXYYYZZZZ`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | --                   |
 | TWILIO_PHONE_TO               | Phone number to receive text notifications at.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | --                   |
 | TWILIO_ACCOUNT_ID             | Twilio account ID.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | --                   |
-| TWILIO_AUTH_CODE              | Twilio auth code.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | --                   |
+| TWILIO_AUTH_CODE              | Twilio auth code.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| DISCORD_WEBHOOK               | The discord webhook url copied from the integrations/custom bot in a channel. Enacapsulate in " "                                                                                                                                                                                                                                                                                                                                                                                                                                                          | --                   |
 | DEBUG                         | Enables debug mode.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | --                   |
 | CDK_NEW_BOOTSTRAP             | Addresses issue for some users relating to AWS move to bootstrap v2.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `1`                  |
 
@@ -109,7 +112,7 @@ data**.
 Alternatively, you can delete the `minecraft-server-stack` first, then the
 `minecraft-domain-stack` from the [AWS Console](https://console.aws.amazon.com/cloudformation/).
 
-Note: the Route53 A record will need to be manually reset to 192.168.1.1 in order for CDK to properly destroy the resources.  This will be fixed later.
+Note: the Route53 A record will need to be manually reset to 192.168.1.1 in order for CDK to properly destroy the resources. This will be fixed later.
 
 ## Troubleshooting
 
@@ -123,7 +126,7 @@ Set the `DEBUG` value in your [configuration](#configuration) to `true` to enabl
 There are limited memory and vCPU configurations which are support by Fargate, in your `.env` ensure that you're using values supported here:
 
 | CPU (TASK_CPU) | Memory (TASK_MEMORY)            |
-|----------------|---------------------------------|
+| -------------- | ------------------------------- |
 | 256            | 512, 1024, 2048                 |
 | 512            | 1024 - 4096 in 1024 increments  |
 | 1024           | 2048 - 8192 in 1024 increments  |
@@ -158,21 +161,21 @@ matches the domain name found in the console.
 
 ### cdk destroy fails
 
-Most CDK destroy failures can be resolved by running it a second time.  Other reasons may include:
+Most CDK destroy failures can be resolved by running it a second time. Other reasons may include:
 
-- Did you reset the Route53 A record back to 192.168.1.1?  This is a temporary problem but currently required.  If you attempted destroy before doing this then just delete the record and run destroy again.
+- Did you reset the Route53 A record back to 192.168.1.1? This is a temporary problem but currently required. If you attempted destroy before doing this then just delete the record and run destroy again.
 - Is your task still running?
 - Any manual changes in the console may require manual deletion or changeback for destroy to work properly
 
-  [AWS CDK]: <https://aws.amazon.com/cdk/>
-  [Open an AWS Account]: <https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/>
-  [Install AWS CLI]: <https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html>
-  [Create an Admin IAM User]: <https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html>
-  [configure it]: <https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html>
-  [Create a public hosted zone]: <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html>
-  [Change the DNS servers]: <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/migrate-dns-domain-inactive.html#migrate-dns-update-domain-inactive>
-  [NodeJS]: <https://nodejs.org/en/download/>
-  [Git]: <https://git-scm.com/download/win>
-  [Usage and Customization]: <https://github.com/doctorray117/minecraft-ondemand#usage-and-customization>
+  [AWS CDK]: https://aws.amazon.com/cdk/
+  [Open an AWS Account]: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/
+  [Install AWS CLI]: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+  [Create an Admin IAM User]: https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html
+  [configure it]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html
+  [Create a public hosted zone]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html
+  [Change the DNS servers]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/migrate-dns-domain-inactive.html#migrate-dns-update-domain-inactive
+  [NodeJS]: https://nodejs.org/en/download/
+  [Git]: https://git-scm.com/download/win
+  [Usage and Customization]: https://github.com/doctorray117/minecraft-ondemand#usage-and-customization
   [minecraft java docker]: https://hub.docker.com/r/itzg/minecraft-server
   [minecraft bedrock docker]: https://hub.docker.com/r/itzg/minecraft-bedrock-server
