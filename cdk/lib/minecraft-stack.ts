@@ -223,12 +223,8 @@ export class MinecraftStack extends Stack {
       'WatchDogContainer',
       {
         containerName: constants.WATCHDOG_SERVER_CONTAINER_NAME,
-        image: isDockerInstalled()
-          ? ecs.ContainerImage.fromAsset(
-              path.resolve(__dirname, '../../minecraft-ecsfargate-watchdog/')
-            )
-          : ecs.ContainerImage.fromRegistry(
-              'doctorray/minecraft-ecsfargate-watchdog'
+        image: ecs.ContainerImage.fromRegistry(
+              'smondlicht/minecraft-ecsfargate-watchdog'
             ),
         essential: true,
         taskDefinition: taskDefinition,
