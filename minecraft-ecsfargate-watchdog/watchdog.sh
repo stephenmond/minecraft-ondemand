@@ -11,8 +11,25 @@
 
 function send_notification ()
 {
-  [ "$1" = "startup" ] && MESSAGETEXT="${SERVICE} is online at ${SERVERNAME}"
-  [ "$1" = "shutdown" ] && MESSAGETEXT="Shutting down ${SERVICE} at ${SERVERNAME}"
+  [ "$1" = "startup" ] && MESSAGETEXT="${SERVICE} is online at ${SERVERNAME}"  && DISCORDTEXT='{
+  "embeds": [
+    {
+      "title": ":green_circle:  Server Successfully Started!",
+      "color": 5763719,
+      "description": "The server has started successfully! Happy Mining!  :pick:"
+    }
+  ]
+}'
+
+  [ "$1" = "shutdown" ] && MESSAGETEXT="Shutting down ${SERVICE} at ${SERVERNAME}" && DISCORDTEXT='{
+  "embeds": [
+    {
+      "title": ":octagonal_sign:  Server Has Stopped",
+      "color": 15548997,
+      "description": "Hope you had fun! Get outside and touch some real grass :herb:"
+    }
+  ]
+}'
 
   ## Twilio Option
   [ -n "$TWILIOFROM" ] && [ -n "$TWILIOTO" ] && [ -n "$TWILIOAID" ] && [ -n "$TWILIOAUTH" ] && \
@@ -23,6 +40,12 @@ function send_notification ()
   [ -n "$SNSTOPIC" ] && \
   echo "SNS topic set, sending $1 message" && \
   aws sns publish --topic-arn "$SNSTOPIC" --message "$MESSAGETEXT"
+
+    ## Discord Option
+  [ -n "$DISCORDWH"] && \
+  echo "Discord information set, sending $1 message" && \
+  curl --silent -H "Content-Type: application/json" -d "$DISCORDTEXT" "$DISCORDWH" 
+
 }
 
 function zero_service ()

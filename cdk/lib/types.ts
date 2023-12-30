@@ -25,6 +25,9 @@ interface TwilioConfig {
    */
   authCode: string;
 }
+interface DiscordConfig {
+  webhookURL: string;
+}
 
 export type MinecraftImageEnv = Record<string, string>;
 
@@ -129,6 +132,7 @@ export interface StackConfig {
    */
   snsEmailAddress: string;
   twilio: TwilioConfig;
+  discord: DiscordConfig;
   /**
    * Additional environment variables to be passed to the
    * [Minecraft Docker Server](https://github.com/itzg/docker-minecraft-server/blob/master/README.md)

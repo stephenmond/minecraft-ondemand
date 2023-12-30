@@ -238,6 +238,7 @@ export class MinecraftStack extends Stack {
           DNSZONE: hostedZoneId,
           SERVERNAME: `${config.subdomainPart}.${config.domainName}`,
           SNSTOPIC: snsTopicArn,
+          DISCORDWH: config.discord.webhookURL,
           TWILIOFROM: config.twilio.phoneFrom,
           TWILIOTO: config.twilio.phoneTo,
           TWILIOAID: config.twilio.accountId,
