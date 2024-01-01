@@ -42,7 +42,7 @@ function send_notification ()
   aws sns publish --topic-arn "$SNSTOPIC" --message "$MESSAGETEXT"
 
     ## Discord Option
-  [ -n "$DISCORDWH"] && \
+  [ -n "$DISCORDWH" ] && \
   echo "Discord information set, sending $1 message" && \
   curl --silent -H "Content-Type: application/json" -d "$DISCORDTEXT" "$DISCORDWH" 
 
